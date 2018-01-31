@@ -18,18 +18,18 @@
                 <h1>Product Discount Calculator</h1>
                 <form action="display_discount.php" method="post">
                     <div class="form-group">
-                        <label for="ProductDescription">Product Description</label>
+                        <label for="ProductDescription">Product Description:</label>
                         <input type="text" name="product_description" class="form-control" placeholder="Enter Product Description">
                     </div>
                     <div class="form-group">
-                        <label for="ListPrice">List Price</label>
+                        <label for="ListPrice">List Price:</label>
                         <input type="text" name="list_price" class="form-control" placeholder="Enter List Price">
                     </div>
                     <div class="form-group">
-                        <label for="DiscountPercent">Discount Percent</label>
+                        <label for="DiscountPercent">Discount Percent:</label>
                         <input type="text" name="discount_percent" class="form-control" placeholder="Enter Discount Percent">
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">Calculate Discount</button>
+                    <button type="submit" class="btn btn-primary mb-2">Calculate Discount:</button>
                 </form>
            </div>
            <div class="col-sm">
