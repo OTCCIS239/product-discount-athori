@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Hello, world!</title>
+        <title>Product Discount Calculator</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,8 @@
             <div class="col-sm">
            </div>
            <div class="col-sm-6">
-                    <form action="display_discount.php" method="post">
+                <h1>Product Discount Calculator</h1>
+                <form action="display_discount.php" method="post">
                     <div class="form-group">
                         <label for="ProductDescription">Product Description</label>
                         <input type="text" name="product_description" class="form-control" placeholder="Enter Product Description">

@@ -28,10 +28,25 @@
   </head>
   <body>
     <div class="container">
+      <div class="col-sm">
+      </div>
+      <div class="col-sm-6">
         <h1>Product Discount Calculator</h1>
-        <label for="ProductDescription">Product Description</label>
-        <label for="ListPrice">List Price</label>
-        <label for="DiscountPercent">Discount Percent</label>
+        <dl>
+          <dt>Product Description:</dt>
+          <dd><?php echo htmlspecialchars($product_description); ?></dd>
+          <dt>List Price:</dt>
+          <dd><?php echo htmlspecialchars($list_price_formatted); ?></dd>
+          <dt>Standard Discount:</dt>
+          <dd><?php echo htmlspecialchars($discount_percent_formatted); ?></dd>
+          <dt>Discount Amount:</dt>
+          <dd><?php echo $discount_formatted; ?></dd>
+          <dt>Discount Price:</dt>
+          <dd><?php echo $discount_price_formatted; ?></dd>
+        </dl>
+      </div>
+      <div class="col-sm">
+      </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
