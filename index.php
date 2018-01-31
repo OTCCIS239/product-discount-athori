@@ -1,3 +1,11 @@
+<?php
+    $products =[
+        "Screwdriver",
+        "Clapton Coil",
+        "WD Red 2tb HDD 7200rpm (x4)",
+        "16GB 4x4 DDR4 Ram"
+    ];
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -19,13 +27,18 @@
                 <form action="display_discount.php" method="post">
                     <div class="form-group">
                         <label for="ProductDescription">Product Description:</label>
-                        <input type="text" name="product_description" class="form-control" placeholder="Enter Product Description">
+                        <!--<input type="text" name="product_description" class="form-control" placeholder="Enter Product Description">-->
+                        <select name="description" class="form-control">
+                        <?php foreach($products as $product): ?>
+                        <option value="<? $product ?>"><?= $product ?></option>
+                        <?php endforeach; ?>
                     </div>
                     <div class="form-group">
                         <label for="ListPrice">List Price:</label>
                         <input type="text" name="list_price" class="form-control" placeholder="Enter List Price">
                     </div>
                     <div class="form-group">
+                    <!-- Create discounts with array. Discount percent = index location-->
                         <label for="DiscountPercent">Discount Percent:</label>
                         <input type="text" name="discount_percent" class="form-control" placeholder="Enter Discount Percent">
                     </div>
