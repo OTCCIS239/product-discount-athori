@@ -1,10 +1,17 @@
 <?php
     $products =[
-        "Screwdriver",
-        "Clapton Coil",
-        "WD Red 2tb HDD 7200rpm (x4)",
-        "16GB 4x4 DDR4 Ram"
+        "WD Purple 4TB HDD",
+        "Nvidia GeForce GTX 1060 Founder's Edition",
+        "Intel i-7-7700k",
+        "Corsair Vengeance 32GB (2x16GB) DDR4 3000 (PC4-24000)",
+        "Trendnet Indoor/Outdoor 8MP 4K H.265 WDR PoE IR Bullet Network Camera"
     ];
+    
+    $coupons= array(
+        'Regular Customer' => 10,
+        'Valued Customer' => 15,
+        "Non-valued Customer" => 5
+    );
 ?>
 <!doctype html>
 <html lang="en">
@@ -29,9 +36,10 @@
                         <label for="ProductDescription">Product Description:</label>
                         <!--<input type="text" name="product_description" class="form-control" placeholder="Enter Product Description">-->
                         <select name="description" class="form-control">
-                        <?php foreach($products as $product): ?>
-                        <option value="<? $product ?>"><?= $product ?></option>
-                        <?php endforeach; ?>
+							<?php foreach($products as $product): ?>
+								<option value="<? $product ?>"><?= $product ?></option>
+							<?php endforeach; ?>
+						</select>
                     </div>
                     <div class="form-group">
                         <label for="ListPrice">List Price:</label>
@@ -40,7 +48,12 @@
                     <div class="form-group">
                     <!-- Create discounts with array. Discount percent = index location-->
                         <label for="DiscountPercent">Discount Percent:</label>
-                        <input type="text" name="discount_percent" class="form-control" placeholder="Enter Discount Percent">
+                        <!--<input type="text" name="discount_percent" class="form-control" placeholder="Enter Discount Percent">-->
+                        <select name="discount_percent" class="form-control">
+                        	<?php foreach($coupons as $coupon_text => $coupon_discount_value): ?>
+								<option value="<? $coupon_discount_value ?>"><?= $coupon_discount_value ?>% - <?= $coupon_text ?></option>
+                        	<?php endforeach; ?>
+						</select>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">Calculate Discount:</button>
                 </form>
