@@ -1,5 +1,5 @@
 <?php
-    //Gets the data from the form
+    /* //Gets the data from the form
     $product_description = filter_input(INPUT_POST, 'product_description');
     $list_price = filter_input(INPUT_POST, 'list_price');
     $discount_percent = filter_input(INPUT_POST, 'discount_percent');
@@ -12,7 +12,13 @@
     $list_price_formatted = "$".number_format($list_price, 2);
     $discount_percent_formatted = $discount_percent."%";
     $discount_formatted = "$".number_format($discount, 2);
-    $discount_price_formatted = "$".number_format($discount_price, 2);
+    $discount_price_formatted = "$".number_format($discount_price, 2); */
+    //$description = $_GET['description'];
+    $price = $_GET['price'];
+    $discount = $_GET['discount'];
+    $discountAmount = $price * ($discount /100);
+    $total = $price - $discountAmount;
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -34,16 +40,16 @@
         <div class="col-sm-6">
           <h1>Product Discount Calculator</h1>
           <dl>
-            <dt>Product Description:</dt>
-            <dd><?php echo htmlspecialchars($product_description); ?></dd>
+            <!-- <dt>Product Description:</dt>
+            <dd></?php echo htmlspecialchars($product_description); ?></dd> -->
             <dt>List Price:</dt>
-            <dd><?php echo htmlspecialchars($list_price_formatted); ?></dd>
+            <dd><?= $price ?></dd>
             <dt>Standard Discount:</dt>
-            <dd><?php echo htmlspecialchars($discount_percent_formatted); ?></dd>
+            <dd><?= $discount ?>%</dd>
             <dt>Discount Amount:</dt>
-            <dd><?php echo $discount_formatted; ?></dd>
+            <dd><?= $discountAmount ?></dd>
             <dt>Discount Price:</dt>
-            <dd><?php echo $discount_price_formatted; ?></dd>
+            <dd><?= $total ?></dd>
           </dl>
         </div>
         <div class="col-sm">
