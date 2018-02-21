@@ -1,23 +1,35 @@
 <?php
-    /* //Gets the data from the form
-    $product_description = filter_input(INPUT_POST, 'product_description');
-    $list_price = filter_input(INPUT_POST, 'list_price');
-    $discount_percent = filter_input(INPUT_POST, 'discount_percent');
+require_once('./db.php');
+  // $dsn = "mysql:host=localhost;dbname=discounter";
+  // $username = 'root';
+  // $password = null;
+  // $conn = new PDO($dsn, $username, $password);
 
-    //Calculates the discount and discounted price
-    $discount = $list_price * $discount_percent * .01;
-    $discount_price = $list_price - $discount;
+  // $productId = $_GET['product_id'];
+  // $query = "SELECT * FROM products WHERE id = $productId ";
+  // $statement = $conn->prepare($query);
+  // $statement -> bindValue(':product_id', $productId);
+  // $statement->execute();
+  // $product = $statement->fetch();
+  // $statement->closeCursor();
 
-    //Apply currncy formatting to the dollar and percent amounts
-    $list_price_formatted = "$".number_format($list_price, 2);
-    $discount_percent_formatted = $discount_percent."%";
-    $discount_formatted = "$".number_format($discount, 2);
-    $discount_price_formatted = "$".number_format($discount_price, 2); */
-    //$description = $_GET['description'];
-    $price = $_GET['price'];
-    $discount = $_GET['discount'];
-    $discountAmount = $price * ($discount /100);
-    $total = $price - $discountAmount;
+  // $couponId = $_GET['coupon_id'];
+  // $query = "SELECT * FROM products WHERE id = $couponId ";
+  // $statement = $conn->prepare($query);
+  // $statement -> bindValue(':coupon_id', $couponId);
+  // $statement->execute();
+  // $coupon = $statement->fetch();
+  // $statement->closeCursor();
+  $productId = $_GET['product_id'];
+  $couponId = $_GET['coupon_id'];
+  $product = getOne("SELECT * FROM products WHERE id = :product_id", [':product_id' => $productId], $conn);
+  $coupon = getOne("SELECT * FROM coupons WHERE id = :coupon_id", [':coupon_id' => $couponId], $conn);
+
+  $description = $product['description'];
+  $price = $product['price'];
+  $discount = $coupon['discount_percent'];
+  $discountAmount = $price * ($discount /100);
+  $total = $price - $discountAmount;
 
 ?>
 <!doctype html>
@@ -40,16 +52,18 @@
         <div class="col-sm-6">
           <h1>Product Discount Calculator</h1>
           <dl>
-            <!-- <dt>Product Description:</dt>
-            <dd></?php echo htmlspecialchars($product_description); ?></dd> -->
+            <dt>Product Description:</dt>
+            <dd><?= $description; ?></dd>
             <dt>List Price:</dt>
             <dd><?= $price ?></dd>
-            <dt>Standard Discount:</dt>
+            <dt>Coupon:</dt>
+            <dd><?= $coupon['code'] ?> - <?= $coupon['description'] ?></dd>
+            <dt>Discount:</dt>
             <dd><?= $discount ?>%</dd>
             <dt>Discount Amount:</dt>
-            <dd><?= $discountAmount ?></dd>
+            <dd>$<?= $discountAmount ?></dd>
             <dt>Discount Price:</dt>
-            <dd><?= $total ?></dd>
+            <dd>$<?= $total ?></dd>
           </dl>
         </div>
         <div class="col-sm">

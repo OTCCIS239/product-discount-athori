@@ -1,23 +1,32 @@
 <?php
-    // $products =[
-    //     "WD Purple 4TB HDD",
-    //     "Nvidia GeForce GTX 1060 Founder's Edition",
-    //     "Intel i-7-7700k",
-    //     "Corsair Vengeance 32GB (2x16GB) DDR4 3000 (PC4-24000)",
-    //     "Trendnet Indoor/Outdoor 8MP 4K H.265 WDR PoE IR Bullet Network Camera"
-    // ];
-    
-    // $coupons= array(
-    //     'Regular Customer' => 10,
-    //     'Valued Customer' => 15,
-    //     "Non-valued Customer" => 5
-    // );
+require_once('./db.php');
+    // $dsn = "mysql:host=localhost;dbname=discounter";
+    // $username = 'root';
+    // $password = null;
+    // $conn = new PDO($dsn, $username, $password);
 
-    $products = [
-        'Xbox One' => 349.99,
-        'PS4' => 299.99,
-        'Wii U' => 249.99
-    ];
+    // $query = "SELECT * FROM products WHERE in_stock > 0";
+    // $statement = $conn->prepare($query);
+    // $statement->execute();
+    // $products = $statement->fetchAll();
+    // $statement->closeCursor();
+
+    // $query = "SELECT * FROM coupons WHERE deleted_at IS NULL";
+    // $statement = $conn->prepare($query);
+    // $statement->execute();
+    // $coupons = $statement->fetchAll();
+    // $statement->closeCursor();
+
+    // var_dump($products);
+    //die();
+    // $products = [
+    //     'Xbox One' => 349.99,
+    //     'PS4' => 299.99,
+    //     'Wii U' => 249.99
+    // ];
+
+    $products = getMany("SELECT * FROM products WHERE in_stock > 0", [], $conn);
+    $coupons = getMany("SELECT * FROM coupons WHERE deleted_at IS NULL", [], $conn);
 ?>
 <!doctype html>
 <html lang="en">
@@ -37,29 +46,23 @@
            </div>
            <div class="col-sm-6">
                 <h1>Product Discount Calculator</h1>
-                <form action="<?= array_key_exists('debug', $_GET) ? 'debug.php' : 'display_discount.php' ?>">
+                <form action="<?= array_key_exists('debug', $_GET) ? 'debug.php' : 'display_discount.php'?>">
                     <div class="form-group">
-                        <label for="price">Price:</label>
-                        <!--<input type="text" name="product_description" class="form-control" placeholder="Enter Product Description">-->
-                        <select name="price" id="price" class="form-control">
-							<?php foreach($products as $product => $price): ?>
-								<option value="<? $price ?>"><?= $product ?> - $<?= $price ?></option>
+                        <label for="product_id">product</label>
+                        <select name="product_id" id="product_id" class="form-control">
+							<?php foreach($products as $product): ?>
+								<option value="<?= $product['id'] ?>"><?= $product['name'] ?> - $<?= $product['price'] ?></option>
 							<?php endforeach; ?>
 						</select>
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="ListPrice">List Price:</label>
-                        <input type="text" name="list_price" class="form-control" placeholder="Enter List Price">
-                    </div> -->
                     <div class="form-group">
-                    <!-- Create discounts with array. Discount percent = index location-->
-                        <label for="discount">Discount Percent:</label>
-                        <input type="text" name="discount" class="form-control" placeholder="Enter Discount Percent">
-                        <!-- <select name="discount_percent" class="form-control">
-                        	</?php foreach($coupons as $coupon_text => $coupon_discount_value): ?>
-								<option value="</? $coupon_discount_value ?>"></?= $coupon_discount_value ?>% - </?= $coupon_text ?></option>
-                        	</?php endforeach; ?>
-						</select> -->
+                        <label for="coupon_id">Discount Percent:</label>
+                        <!-- <input type="text" name="discount" class="form-control" placeholder="Enter Discount Percent"> -->
+                        <select name="coupon_id" id="coupon_id" class="form-control">
+							<?php foreach($coupons as $coupon): ?>
+								<option value="<?= $coupon['id'] ?>"><?= $coupon['code'] ?> - <?= $coupon['discount_percent'] ?>%</option>
+							<?php endforeach; ?>
+						</select>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">Calculate Discount:</button>
                 </form>
